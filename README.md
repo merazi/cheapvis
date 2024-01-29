@@ -1,6 +1,6 @@
 # CHEAPvis
 
-Basically a cheap version of Jarvis using ChatGPT and Espeak
+Basically a cheap version of Jarvis using ChatGPT and Espeak (A wrapper script rather)
 
 ## Dependencies
 
