@@ -15,7 +15,7 @@ def ask_gpt(query):
 def speak(script):
     FNULL=open(os.devnull, 'w')
     subprocess.run(['espeak','-x', f'{script}'], stdout=FNULL, stderr=subprocess.STDOUT)
-    print(f'Transcript:\n${script}')
+    print(f'Transcript:\n{script}')
 
 if __name__ == "__main__":
     while True:
