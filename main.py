@@ -5,15 +5,24 @@ import subprocess, os, sys
 # if there are command line args pass them to chatgpt
 
 def ask_gpt(query):
-    answer=subprocess.check_output(['tgpt', '-q', f'{query}'])
+    answer_raw=subprocess.check_output(['tgpt', '-q', f'{query}'])
+    answer_decoded=answer_raw.decode('utf-8')
+    answer_processed=answer_decoded.rstrip()
+    return answer_processed
+
+def speak(script):
     FNULL=open(os.devnull, 'w')
-    subprocess.run(['espeak', '-ven+m1', '-x', f'{answer}'], stdout=FNULL, stderr=subprocess.STDOUT)
-    print(f'Transcript:\n${answer}')
+    subprocess.run(['espeak', '-ves','-x', f'{script}'], stdout=FNULL, stderr=subprocess.STDOUT)
+    print(f'Transcript:\n${script}')
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        query=sys.argv[1]
-        ask_gpt(query)
-    else:
-        query=input("What do you wanna search for? ")
-        ask_gpt(query)
+    while True:
+        print("Hey! Press Ctrl+C to exit.")
+        if len(sys.argv) > 1:
+            query=sys.argv[1]
+            what_to_say=ask_gpt(query)
+        else:
+            query=input("What do you wanna search for? ")
+            what_to_say=ask_gpt(query)
+
+        speak(what_to_say)
