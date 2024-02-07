@@ -1,3 +1,5 @@
+#!/bin/env python3
+
 import subprocess, os, sys
 
 # so... what I want to do is check if the user enters input on the command line
@@ -12,7 +14,7 @@ def ask_gpt(query):
 
 def speak(script):
     FNULL=open(os.devnull, 'w')
-    subprocess.run(['espeak', '-ves','-x', f'{script}'], stdout=FNULL, stderr=subprocess.STDOUT)
+    subprocess.run(['espeak','-x', f'{script}'], stdout=FNULL, stderr=subprocess.STDOUT)
     print(f'Transcript:\n${script}')
 
 if __name__ == "__main__":
